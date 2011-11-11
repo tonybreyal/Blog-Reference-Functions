@@ -4,7 +4,7 @@
 # Reference: [add]
 
 
-scrape_google_plus_page <- function(u) {
+scrape_google_plus_page <- function(u, is.URL) {
   # load required packages for scraper function
   require(RCurl)
   require(XML)
@@ -20,9 +20,14 @@ scrape_google_plus_page <- function(u) {
     return(xx)
   }
   
-  # If url is HTTPS makes sure we have the SSL certificate off the cURL website to download html
-  if(!file.exists("cacert.perm")) download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.perm")
-  html <- getURL(u, cainfo = "cacert.perm")
+  # determine actions if u is a file or a URL
+  if(is.URL) {
+    # If url is HTTPS makes sure we have the SSL certificate off the cURL website to download html
+    if(!file.exists("cacert.perm")) download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.perm")
+    html <- getURL(u, cainfo = "cacert.perm")
+  } else {
+    html <- readLines(u, warn = FALSE)
+  }
   doc <- htmlParse(html)
 
   # path to the set of nodes which are of interest
@@ -59,10 +64,14 @@ scrape_google_plus_page <- function(u) {
 }
 
 
-###--- EXAMLPLE ---###
+###--- EXAMLPLE 1: Using a URL ---###
 
 u <- "https://plus.google.com/110286587261352351537/posts"
-df <- scrape_google_plus_page(u)
+df <- scrape_google_plus_page(u, is.URL = TRUE)
+
+dim(df)
+# [1] 20 12
+
 t(df[2, ])
                                                                                             
 # posted.by       "Felicia Day"                                                                                   
@@ -77,3 +86,14 @@ t(df[2, ])
 # pluses          "261"                                                                                           
 # pluses.by       "Ken Warren, Dennis Tabula, Eddie Farrell, Nicholas Cancelliere, Stephen Forbes and 1 more"     
 # type            "Public"
+
+
+###--- EXAMLPLE 2: Using a File ---###
+
+# choose the .html file you've saved of the Google+ page
+u <- file.choose()
+df <- scrape_google_plus_page(u, is.URL = FALSE)
+
+dim(df)
+# [1] 60 12
+
