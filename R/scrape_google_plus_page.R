@@ -37,7 +37,7 @@ scrape_google_plus_page <- function(u, is.URL) {
   df <- data.frame(
     posted.by = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='Hf']", xmlValue),
     ID = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')][1]//span[@class='eE']/a[@oid]", xmlAttrs, FUN2 = function(xx) sapply(xx, function(x) x[3])),
-    message = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='zj']", xmlValue),
+    message = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//div[@class='vg']", xmlValue),
     post.date = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='mo fj']//span[@class='Qh kn']//a[@class='c-G-j c-i-j-ua hl']", xmlValue),
     comments = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='a-j zx']//span[@class='Fw tx']", xmlValue),
     comments.by = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='px']//span[@class='uo']", xmlValue),
