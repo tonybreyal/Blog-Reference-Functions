@@ -1,7 +1,7 @@
 # Author: Tony Breyal
-# Date: [add]
+# Date: 2011-11-11
 # Description: This function extracts as much information as it can for each post on a google plus status update page
-# Reference: [add]
+# Reference: tonybreyal.wordpress.com/2011/11/11/web-scraping-google-via-xpath/
 
 
 scrape_google_plus_page <- function(u, is.URL) {
@@ -35,9 +35,14 @@ scrape_google_plus_page <- function(u, is.URL) {
 
   # construct data frame
   df <- data.frame(
-    posted.by = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='Hf']", xmlValue),
+    posted.by = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='Hf']", xmlValue),
     ID = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')][1]//span[@class='eE']/a[@oid]", xmlAttrs, FUN2 = function(xx) sapply(xx, function(x) x[3])),
     message = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//div[@class='vg']", xmlValue),
+    message.share.link.name = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//div[@class='Ve jn']//div[@class='Bx']//div[@class='Us Gk']//div[@class='Jm']//div[@class='B-u-C dE']//a[@href]", xmlValue, FUN2 = function(xx) sapply(xx, function(x) ifelse(length(x)<1, return(NA), x[1]))),
+    message.share.link = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//div[@class='Ve jn']//div[@class='Bx']//div[@class='Us Gk']//div[@class='Jm']//div[@class='B-u-C dE']//a[@href]", xmlAttrs,  FUN2 =   function(xx) {
+  xx[sapply(xx, length)<1] <- NA
+  return(sapply(xx, function(x) x[1]))
+}),
     post.date = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='mo fj']//span[@class='Qh kn']//a[@class='c-G-j c-i-j-ua hl']", xmlValue),
     comments = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='a-j zx']//span[@class='Fw tx']", xmlValue),
     comments.by = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='px']//span[@class='uo']", xmlValue),
@@ -45,7 +50,6 @@ scrape_google_plus_page <- function(u, is.URL) {
     shares = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//div[@class='Qx']//span[@class='a-j zo']", xmlValue),
     shares.by = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//div[@class='Qx']//span[@class='uo']", xmlValue),
     pluses = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='me lg c-G-j']//div[@class='sB gl a-l-k me']", xmlValue),
-    pluses.by = xpathLVApply(doc, base,"//div[starts-with(@id, 'update')]//span[@class='xo']", xmlValue),
     type = xpathLVApply(doc, base, "//div[starts-with(@id, 'update')]//span[@class='mo fj']//span[@class='a-j Rh Fo il']", xmlValue),
     stringsAsFactors = FALSE)
 
@@ -74,18 +78,19 @@ dim(df)
 
 t(df[2, ])
                                                                                             
-# posted.by       "Felicia Day"                                                                                   
-# ID              "110286587261352351537"                                                                         
-# message         "I love The Guild. You're pretty."                                                              
-# post.date       "2011-11-09"                                                                                    
-# comments        "66"                                                                                            
-# comments.by     "Jesse McGlothlin, Ronel Villeno, Sealavindo Marine, Alexander Pinckard, Vivek Singh and 1 more"
-# sample.comments "Jesse McGlothlin  -  I love The Guild. You're pretty.    "                                     
-# shares          "20"                                                                                            
-# shares.by       "Amy Mayer, Bonnie Zabytko, Brad Chasenore, Dan Wade, Dark Matter fanzine and 15 more"          
-# pluses          "261"                                                                                           
-# pluses.by       "Ken Warren, Dennis Tabula, Eddie Farrell, Nicholas Cancelliere, Stephen Forbes and 1 more"     
-# type            "Public"
+posted.by               "Felicia Day"                                                                                             
+ID                      "110286587261352351537"                                                                                   
+message                 "Commentary vid for DA: R Ep 5!"                                                                          
+message.share.link.name "Dragon Age: Redemption Ep5 Annotation"                                                                   
+message.share.link      "http://www.youtube.com/watch?v=GZ4NGa0qeaM"                                                              
+post.date               "2011-11-09"                                                                                              
+comments                "67"                                                                                                      
+comments.by             "Christopher H, Jesse McGlothlin, Ronel Villeno, Sealavindo Marine, Alexander Pinckard and 1 more"        
+sample.comments         "Christopher H  -  Watching your commentary videos are like watching your video blog in The Guild! :)    "
+shares                  "20"                                                                                                      
+shares.by               "Amy Mayer, Bonnie Zabytko, Brad Chasenore, Dark Matter fanzine, Donald Coleman and 15 more"              
+pluses                  "270"                                                                                                     
+type                    "Public"
 
 
 ###--- EXAMLPLE 2: Using a File ---###
