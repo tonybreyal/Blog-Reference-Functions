@@ -4,7 +4,7 @@
 # Reference: tonybreyal.wordpress.com/2011/11/11/web-scraping-google-via-xpath/
 
 
-scrape_google_plus_page <- function(u, is.URL) {
+scrape_google_plus_page <- function(u, is.URL = grepl("http.*://.*\\.", u)) {
   # load required packages for scraper function
   require(RCurl)
   require(XML)
