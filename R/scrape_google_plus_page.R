@@ -78,19 +78,19 @@ dim(df)
 
 t(df[2, ])
                                                                                             
-posted.by               "Felicia Day"                                                                                             
-ID                      "110286587261352351537"                                                                                   
-message                 "Commentary vid for DA: R Ep 5!"                                                                          
-message.share.link.name "Dragon Age: Redemption Ep5 Annotation"                                                                   
-message.share.link      "http://www.youtube.com/watch?v=GZ4NGa0qeaM"                                                              
-post.date               "2011-11-09"                                                                                              
-comments                "67"                                                                                                      
-comments.by             "Christopher H, Jesse McGlothlin, Ronel Villeno, Sealavindo Marine, Alexander Pinckard and 1 more"        
-sample.comments         "Christopher H  -  Watching your commentary videos are like watching your video blog in The Guild! :)    "
-shares                  "20"                                                                                                      
-shares.by               "Amy Mayer, Bonnie Zabytko, Brad Chasenore, Dark Matter fanzine, Donald Coleman and 15 more"              
-pluses                  "270"                                                                                                     
-type                    "Public"
+# posted.by               "Felicia Day"                                                                                             
+# ID                      "110286587261352351537"                                                                                   
+# message                 "Commentary vid for DA: R Ep 5!"                                                                          
+# message.share.link.name "Dragon Age: Redemption Ep5 Annotation"                                                                   
+# message.share.link      "http://www.youtube.com/watch?v=GZ4NGa0qeaM"                                                              
+# post.date               "2011-11-09"                                                                                              
+# comments                "67"                                                                                                      
+# comments.by             "Christopher H, Jesse McGlothlin, Ronel Villeno, Sealavindo Marine, Alexander Pinckard and 1 more"        
+# sample.comments         "Christopher H  -  Watching your commentary videos are like watching your video blog in The Guild! :)    "
+# shares                  "20"                                                                                                      
+# shares.by               "Amy Mayer, Bonnie Zabytko, Brad Chasenore, Dark Matter fanzine, Donald Coleman and 15 more"              
+# pluses                  "270"                                                                                                     
+# type                    "Public"
 
 
 ###--- EXAMLPLE 2: Using a File ---###
