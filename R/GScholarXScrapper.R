@@ -1,6 +1,6 @@
 # Author: Kay Cichini
 # Modified by: Tony Breyal
-# Description: Returns a wordcloud for a Google Scholar web search base on title.
+# Description: Returns a wordcloud for a Google Scholar web search based on a given field e.g. "title", "description", etc.
 # Notes: This is Kay Cichini's function but I modified it to use XPath expressions via the XML package (see get_google_scholar_df.R) instead of just regular expresions alone. I also added some vectorisation and restructured the function to make it easier for me to read and understand what is happening.
 # References: http://thebiobucket.blogspot.com/2011/11/r-function-google-scholar-webscraper.html
 #             https://docs.google.com/document/d/1w_7niLqTUT0hmLxMfPEB7pGiA6MXoZBy6qPsKsEe_O0/edit?hl=en_US
@@ -15,7 +15,7 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
   require(stringr)
   require(tm)
   require(wordcloud)
-  require(Rstem)
+  require(Rstem) # I couldn't get the Snowball package to install because of java conflicts, but this does the same job.
   
   
   ###--- LOCAL FUNCTIONS ---###
@@ -183,5 +183,68 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
 }
 
 
+###--- EXAMPLE 1: producing work cloud based the title field of search results---###
 GScholarXScraper(search.str = "Baldur's Gate", field = "title", write.table = FALSE, stem = TRUE)
+
+#          word freq
+# game     game   45
+# comput comput   12
+# video   video    7
+# 
+# 
+# Number of titles submitted = 100
+# 
+# Number of results as retrieved from first webpage = 267
+# 
+# Be aware that sometimes titles in Google Scholar outputs are truncated - that is why, i.e., some mandatory intitle-search strings may not be contained in all titles
+
+###--- EXAMPLE 2: producing work cloud based the description field of search results---###
+
 GScholarXScraper(search.str = "Baldur's Gate", field = "description", write.table = FALSE, stem = TRUE)
+#                word freq
+# gate           gate   95
+# baldur       baldur   87
+# game           game   86
+# roleplay   roleplay   19
+# page           page   18
+# map             map   17
+# comput       comput   13
+# fantasi     fantasi   12
+# star           star   12
+# popular     popular   11
+# charact     charact   10
+# final         final   10
+# neverwint neverwint   10
+# seri           seri   10
+# war             war   10
+# biowar       biowar    9
+# knight       knight    9
+# night         night    9
+# play           play    9
+# player       player    9
+# role           role    9
+# shadow       shadow    9
+# develop     develop    8
+# set             set    8
+# amn             amn    7
+# gam             gam    7
+# includ       includ    7
+# interact   interact    7
+# mani           mani    7
+# republ       republ    7
+# rpg             rpg    7
+# rpgs           rpgs    7
+# adventur   adventur    6
+# baldursg   baldursg    6
+# design       design    6
+# effect       effect    6
+# multiplay multiplay    6
+# stori         stori    6
+# top             top    6
+# 
+# 
+# Number of titles submitted = 100
+# 
+# Number of results as retrieved from first webpage = 267
+# 
+# Be aware that sometimes titles in Google Scholar outputs are truncated - that is why, i.e., some mandatory intitle-search strings may not be contained in all titles
