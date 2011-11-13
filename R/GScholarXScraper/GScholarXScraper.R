@@ -3,7 +3,7 @@
 # Licence: Original was non-commercial, so this will be the same.
 # Modified by: Tony Breyal
 # Contributations: Philipp Riemer - improvements to the xpathLVApply function code, see http://tonybreyal.wordpress.com/2011/11/11/web-scraping-yahoo-search-page-via-xpath/#comment-45
-# Description: Returns a wordcloud for a Google Scholar web search based on a given field e.g. "title", "description", etc.
+# Description: Returns a word cloud for a Google Scholar web search based on a given field e.g. "title", "description", etc. and an input search string
 # Notes: This is Kay Cichini's function but I modified it to use XPath expressions via the XML package instead of regular expresions alone. I also added some vectorisation, word stemming and restructured the function to make it easier for me to read.
 # Blot Reference:
 # Other References: http://thebiobucket.blogspot.com/2011/11/r-function-google-scholar-webscraper.html
@@ -204,7 +204,7 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
 
 # ###--- EXAMPLES ---###
 # 
-# #EXAMPLE 1: producing work cloud based the title field of search results
+# #EXAMPLE 1: produces a word cloud based the 'title'' field of Google Scholar search results and an input search string
 # GScholarXScraper(search.str = "Baldur's Gate", field = "title", write.table = FALSE, stem = TRUE)
 # 
 # #              word freq
@@ -221,7 +221,7 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
 # # 
 # # Be aware that sometimes titles in Google Scholar outputs are truncated - that is why, i.e., some mandatory intitle-search strings may not be contained in all titles
 # 
-# # EXAMPLE 2: producing work cloud based the description field of search results
+# # EXAMPLE 2: produces a word cloud based the 'description' field of Google Scholar search results and an input search string
 # GScholarXScraper(search.str = "Baldur's Gate", field = "description", write.table = FALSE, stem = TRUE)
 # 
 # #                word freq
