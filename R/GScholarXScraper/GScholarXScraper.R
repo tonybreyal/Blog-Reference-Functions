@@ -54,19 +54,24 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
     # start = 0 was already used above so we need 100, 200, ...
     start <- c(100*1:(pages.max-1))
       
-    # Collect webpages as list, the first was already retrieved and is assigned to first
-    # list-element. the rest will be assigned in th below for loop:
+    # Construct Google Scholar URLs (one for each pages of resutls)
     urls <- paste("http://scholar.google.com/scholar?start=", start[(2:pages.max)-1],
                   "&q=", search.str,
                   "&hl=en&lr=lang_en&num=100&as_sdt=1&as_vis=1", 
                   sep = "")
+    
+    # Encode URLs to be valid
     urls <- as.vector(sapply(urls, URLencode, USE.NAMES = FALSE))
-    webpages <- lapply(urls, getURL)
+    
+    # Collect webpages as list; first webpage 'html_str' has already been retrieved above, no need to fetch it again!
+    webpages <- list(c(html_str, lapply(urls, getURL)))
       
-    # return webpages
+    # Set up return value, assigning number of results to first element
     mylist <- list()
-    mylist[[1]] <- no.res 
-    mylist[[2]] <- list(c(html_str, webpages))
+    mylist[[1]] <- no.res
+    mylist[[2]] <- webpages
+    
+    # Return results and webpages in a list structure
     return(mylist)
   }
   
@@ -140,11 +145,15 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
     # should words be stemed
     if(stem) GS.df[[1]] = sapply(1:dim(GS.df)[1], function(i) wordStem2(GS.df[i, ]))
     
-    # create corpus
+    # create  corpus
     corpus <- Corpus(DataframeSource(GS.df))
+    
+    # clean corpus
     corpus <- tm_map(corpus, removePunctuation)
     corpus <- tm_map(corpus, tolower)
     corpus <- tm_map(corpus, function(x)removeWords(x, stopwords()))
+    
+    # reshape data 
     tdm <- TermDocumentMatrix(corpus)
     m <- as.matrix(tdm)
     v <- sort(rowSums(m), decreasing = TRUE)
@@ -153,7 +162,7 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
     # Remove strings with numbers:
     df <- df[-grep("[1-9]", df$word), ]
     
-    # Remove unwanted rubbish (..to be extended?):
+    # Remove unwanted rubbish (..to be extended?) 
     rubbish <- c("htmls", "hellip", "amp", "quot")
     df <- df[df$word%in%rubbish == FALSE, ]
     
