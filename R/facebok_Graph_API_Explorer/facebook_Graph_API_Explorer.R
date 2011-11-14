@@ -1,9 +1,12 @@
 # Author: Tony Breyal
 # Date: 2011-11-10
-# Description: This function uses the FB Graph API Explorer to get posts and meta-data for a given Facebook Wall Page. 
+# Description: This function uses the Facebook Graph API Explorer to get posts and meta-data for a given Facebook Wall Page. 
 # Notes: Currently only works on Windows because I don't know of a cross-platform equivalent of winDialogueString.
 # Reference: http://tonybreyal.wordpress.com/2011/11/10/facebook-graph-api-explorer-with-r/
 
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
 
 
 Facebook_Graph_API_Explorer <- function() {
@@ -83,23 +86,23 @@ Facebook_Graph_API_Explorer <- function() {
 }
 
 
-###--- EXAMPLE ---###
-
-df <- Facebook_Graph_API_Explorer()
-t(df[4,])
-
-# post.id                      "127031120644257_319062954774405"
-# from.name                    "Torchwood"
-# from.id                      "119328091441982"
-# to.name                      "Torchwood"
-# to.id                        "119328091441982"
-# to.category                  "Tv show"
-# created.time                 "2011-11-10 12:05:21"
-# message                      "If you're missing Torchwood & Doctor Who and are after some good, action-packed science fiction, why not check out FOX's awesome prehistoric romp, Terra Nova? It's carried in the UK on Sky TV and is well worth catching up with & following! The idea - The Earth is dying, it's in its final years. Life's intolerable & getting worse. Scientists take advantage of a rift in time & space to set up a 'fresh start' colony on Terra Nova - the earth, 60 million years ago. The adventure then begins..."
-# type                         "link"
-# likes.count                  NA
-# comments.count               "0"
-# sample.comments              ""
-# sample.comments.from.name    ""
-# sample.comments.from.id      ""
-# sample.comments.created.time ""
+# ###--- EXAMPLE ---###
+# 
+# df <- Facebook_Graph_API_Explorer()
+# t(df[4,])
+# 
+# # post.id                      "127031120644257_319062954774405"
+# # from.name                    "Torchwood"
+# # from.id                      "119328091441982"
+# # to.name                      "Torchwood"
+# # to.id                        "119328091441982"
+# # to.category                  "Tv show"
+# # created.time                 "2011-11-10 12:05:21"
+# # message                      "If you're missing Torchwood & Doctor Who and are after some good, action-packed science fiction, why not check out FOX's awesome prehistoric romp, Terra Nova? It's carried in the UK on Sky TV and is well worth catching up with & following! The idea - The Earth is dying, it's in its final years. Life's intolerable & getting worse. Scientists take advantage of a rift in time & space to set up a 'fresh start' colony on Terra Nova - the earth, 60 million years ago. The adventure then begins..."
+# # type                         "link"
+# # likes.count                  NA
+# # comments.count               "0"
+# # sample.comments              ""
+# # sample.comments.from.name    ""
+# # sample.comments.from.id      ""
+# # sample.comments.created.time ""

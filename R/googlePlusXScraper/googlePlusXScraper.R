@@ -3,6 +3,10 @@
 # Description: This function extracts as much information as it can for each post on a google plus status update page
 # Reference: tonybreyal.wordpress.com/2011/11/11/web-scraping-google-via-xpath/
 
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
+
 
 googlePlusXScraper <- function(input) {
   ###--- PACKAGES ---###
@@ -37,7 +41,7 @@ googlePlusXScraper <- function(input) {
     is.file <- file.exists(input)
     
     # stop if input does not seem to be URLS and/or files
-    if(sum(is.file) < 1 && length(input) > 1) stop("'input' to YahooSearchXScraper() could not be processed.")
+    if(sum(is.file) < 1 && length(input) > 1) stop("'input' to googlePlusXScraper() could not be processed.")
     
     # read html from each file
     html.files <- lapply(input[is.file], readLines, warn = FALSE)
@@ -49,7 +53,7 @@ googlePlusXScraper <- function(input) {
     return(c(html.files, html.webpages))
   }
   
-  # construct data frame from the html of a single Yahoo search page
+  # construct data frame from the html of a single Google Plus posts page
   get_google_plus_df <- function(html) {
     # parse html into tree structure
     doc <- htmlParse(html)
@@ -90,7 +94,7 @@ googlePlusXScraper <- function(input) {
   # STEP 1: Determine input type(s) and grab html accordingly
   doc.list <- evaluate_input(input)
   
-  # STEP 2: get yahoo data frame.
+  # STEP 2: get google plus data frame.
   df <- do.call("rbind", lapply(doc.list, get_google_plus_df))
   return(df)
 }

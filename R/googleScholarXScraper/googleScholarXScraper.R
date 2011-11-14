@@ -2,10 +2,12 @@
 # Date: 2011-11-08
 # Modified: 2011-11-13
 # Description: This function will retrieve as information as it can about each result on a Google Scholar search page
-# Licence: non-comercial
 # Contributations: Philipp Riemer - improvements to the xpathLVApply function code, see http://tonybreyal.wordpress.com/2011/11/11/web-scraping-yahoo-search-page-via-xpath/#comment-45
 # Blog Reference: http://tonybreyal.wordpress.com/2011/11/08/web-scraping-google-scholar-part-2-complete-success/
 
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License 
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
 
 googleScholarXScraper <- function(input) {
   ###--- PACKAGES ---###
@@ -100,22 +102,22 @@ googleScholarXScraper <- function(input) {
 }
 
 
-###--- EXAMPLE ---###
-
-u <- "http://scholar.google.com/scholar?as_q=baldur%27s+gate+2&num=20&btnG=Search+Scholar&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&as_sdt=1.&as_sdtp=on&as_sdtf=&as_sdts=5&hl=en"
-df <- googleScholarXScraper(u)
-t(df[1, ])
-
-# title             "Baldur's gate and history: Race and alignment in digital role playing games"
-# type              "PDF"
-# publication       "C Warnes - Digital Games Research Conference (DiGRA), 2005 - digra.org"
-# description       "... It is argued that games like Baldur's Gate I and II cannot be properly understood without\nreference to the fantasy novels that inform them. ... Columbia University Press, New York, 2003.\npp 2-3. 12. 8. Hess, Rhyss. Baldur's Gate and Tales of the Sword Coast. ... \n"
-# cited_by          "8"
-# cited_ref         "/scholar?cites=13835674724285845934&as_sdt=2005&sciodt=0,5&hl=en&oe=ASCII&num=20"
-# title_url         "http://digra.org:8080/Plone/dl/db/06276.04067.pdf"
-# view_as_html      "http://scholar.googleusercontent.com/scholar?q=cache:rpHocNswAsAJ:scholar.google.com/+baldur%27s+gate+2&hl=en&oe=ASCII&num=20&as_sdt=0,5"
-# view_all_versions "/scholar?cluster=13835674724285845934&hl=en&oe=ASCII&num=20&as_sdt=0,5"
-# from_domain       "[PDF] from digra.org"
-# related_articles  "/scholar?q=related:rpHocNswAsAJ:scholar.google.com/&hl=en&oe=ASCII&num=20&as_sdt=0,5"
-# library_search    NA
-# result_set        "Results 1 - 20 of about 404.   (0.29 sec)Â "
+# ###--- EXAMPLES ---###
+# # example 1: A single URL
+# u <- "http://scholar.google.com/scholar?as_q=baldur%27s+gate+2&num=20&btnG=Search+Scholar&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&as_sdt=1.&as_sdtp=on&as_sdtf=&as_sdts=5&hl=en"
+# df <- googleScholarXScraper(u)
+# t(df[1, ])
+# 
+# # title             "Baldur's gate and history: Race and alignment in digital role playing games"
+# # type              "PDF"
+# # publication       "C Warnes - Digital Games Research Conference (DiGRA), 2005 - digra.org"
+# # description       "... It is argued that games like Baldur's Gate I and II cannot be properly understood without\nreference to the fantasy novels that inform them. ... Columbia University Press, New York, 2003.\npp 2-3. 12. 8. Hess, Rhyss. Baldur's Gate and Tales of the Sword Coast. ... \n"
+# # cited_by          "8"
+# # cited_ref         "/scholar?cites=13835674724285845934&as_sdt=2005&sciodt=0,5&hl=en&oe=ASCII&num=20"
+# # title_url         "http://digra.org:8080/Plone/dl/db/06276.04067.pdf"
+# # view_as_html      "http://scholar.googleusercontent.com/scholar?q=cache:rpHocNswAsAJ:scholar.google.com/+baldur%27s+gate+2&hl=en&oe=ASCII&num=20&as_sdt=0,5"
+# # view_all_versions "/scholar?cluster=13835674724285845934&hl=en&oe=ASCII&num=20&as_sdt=0,5"
+# # from_domain       "[PDF] from digra.org"
+# # related_articles  "/scholar?q=related:rpHocNswAsAJ:scholar.google.com/&hl=en&oe=ASCII&num=20&as_sdt=0,5"
+# # library_search    NA
+# # result_set        "Results 1 - 20 of about 404.   (0.29 sec)Â "

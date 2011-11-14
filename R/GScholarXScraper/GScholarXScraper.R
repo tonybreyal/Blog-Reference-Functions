@@ -1,13 +1,17 @@
 # Filename: GScholarXScraper.R
 # Author: Kay Cichini
-# Licence: Original was non-commercial, so this will be the same.
 # Modified by: Tony Breyal
 # Contributations: Philipp Riemer - improvements to the xpathLVApply function code, see http://tonybreyal.wordpress.com/2011/11/11/web-scraping-yahoo-search-page-via-xpath/#comment-45
+# Licence: Kay specified the original being non-comercial. As one specific licence wasn't specifially choosen, I choose the one below as the closest to what I beleve he meant.
 # Description: Returns a word cloud for a Google Scholar web search based on a given field e.g. "title", "description", etc. and an input search string
 # Notes: This is Kay Cichini's function but I modified it to use XPath expressions via the XML package instead of regular expresions alone. I also added some vectorisation, word stemming and restructured the function to make it easier for me to read.
-# Blot Reference:
+# Blog Reference: http://tonybreyal.wordpress.com/2011/11/14/gscholarxscraper-hacking-the-gscholarscraper-function-with-xpath/
 # Other References: http://thebiobucket.blogspot.com/2011/11/r-function-google-scholar-webscraper.html
 #                   https://docs.google.com/document/d/1w_7niLqTUT0hmLxMfPEB7pGiA6MXoZBy6qPsKsEe_O0/edit?hl=en_US
+
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
 
 
 GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, stem = TRUE) {
@@ -204,7 +208,7 @@ GScholarXScraper <- function(search.str, field = "title", write.table = FALSE, s
 
 # ###--- EXAMPLES ---###
 # 
-# #EXAMPLE 1: produces a word cloud based the 'title'' field of Google Scholar search results and an input search string
+# # EXAMPLE 1: produces a word cloud based the 'title'' field of Google Scholar search results and an input search string
 # GScholarXScraper(search.str = "Baldur's Gate", field = "title", write.table = FALSE, stem = TRUE)
 # 
 # #              word freq

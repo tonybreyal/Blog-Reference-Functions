@@ -2,9 +2,12 @@
 # Date: 2011-11-11
 # Modified: 2011-11-13
 # Description: This function extracts as much information as it can for each result returned by a Yahoo search page.
-# Licence: non-comercial
 # Contributations: Philipp Riemer - improvements to the xpathLVApply function code, see http://tonybreyal.wordpress.com/2011/11/11/web-scraping-yahoo-search-page-via-xpath/#comment-45
 # Blog Reference: http://tonybreyal.wordpress.com/2011/11/10/facebook-graph-api-explorer-with-r/
+
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
 
 
 yahooSearchXScraper <- function(input) {

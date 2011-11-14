@@ -2,9 +2,12 @@
 # Date: 2011-11-11
 # Modified: 2011-11-13
 # Description: This function extracts as much information as it can for each result returned by a Google search page.
-# Licence: non-comercial
 # Contributations: Philipp Riemer - improvements to the xpathLVApply function code, see http://tonybreyal.wordpress.com/2011/11/11/web-scraping-yahoo-search-page-via-xpath/#comment-45
 # Blog Reference: http://tonybreyal.wordpress.com/2011/11/10/facebook-graph-api-explorer-with-r/
+
+# Copyright (c) 2011, under the Creative Commons Attribution-NonCommercial 3.0 Unported (CC BY-NC 3.0) License
+# For more information see: https://creativecommons.org/licenses/by-nc/3.0/
+# All rights reserved.
 
 
 googleSearchXScraper <- function(input) {
@@ -52,12 +55,12 @@ googleSearchXScraper <- function(input) {
     return(c(html.files, html.webpages))
   }
   
-  # construct data frame from the html of a single Yahoo search page
+  # construct data frame from the html of a single google search page
   get_google_search_df <- function(html) {
     # parse html into tree structure
     doc <- htmlParse(html)
 
-    # construct yahoo search data frame
+    # construct google search data frame
     xpath.base <- "//li[@class='g']"
     df <- data.frame(
       title = xpathLVApply(doc, xpath.base, "//h3//a[@href]", xmlValue),
@@ -89,10 +92,15 @@ googleSearchXScraper <- function(input) {
 }
 
 
-###--- EXAMPLES ---###
-#
-# Example 1
-input <- "http://www.google.co.uk/search?aq=f&gcx=w&sourceid=chrome&ie=UTF-8&q=r+project#q=r+project&hl=en&tbo=1&prmdo=1&output=search&source=lnt&tbs=qdr:m&sa=X&ei=qvO_Ttj1KITb8AOPzqT_Aw&ved=0CAoQpwUoBA&fp=1&biw=1920&bih=1086&cad=b&bav=on.2,or.r_gc.r_pw.r_cp.,cf.osb"
-df <- googleSearchXScraper(input)
-t(df[1, ])
+# ###--- EXAMPLES ---###
+# input <- "http://www.google.co.uk/search?aq=f&gcx=w&sourceid=chrome&ie=UTF-8&q=r+project#q=r+project&hl=en&tbo=1&prmdo=1&output=search&source=lnt&tbs=qdr:m&sa=X&ei=qvO_Ttj1KITb8AOPzqT_Aw&ved=0CAoQpwUoBA&fp=1&biw=1920&bih=1086&cad=b&bav=on.2,or.r_gc.r_pw.r_cp.,cf.osb"
+# df <- googleSearchXScraper(input)
+# t(df[1, ])
+# 
+# # title       "The R Project for Statistical Computing"                                                                                                                                                                                                                                                                        
+# # url         "http://www.r-project.org/"                                                                                                                                                                                                                                                                                      
+# # description "R, also called GNU S, is a strongly functional language and environment to   statistically explore data sets, make many graphical displays of data from custom ...www.r-project.org/ - Cached - SimilarThe Comprehensive R Archive NetworkDownload R for WindowsManualsCRAN - MirrorsSearchContributed Packages"
+# # cached      "//webcache.googleusercontent.com/search?gcx=w&hl=en&q=cache:zxfJms4oTtkJ:http://www.r-project.org/+r+project&ct=clnk"                                                                                                                                                                                           
+# # similar     "/search?gcx=w&hl=en&tbo=1&q=related:http://www.r-project.org/+r+project&sa=X" 
+
 
