@@ -47,11 +47,7 @@ googlePlusXScraper <- function(input) {
     html.files <- lapply(input[is.file], readLines, warn = FALSE)
     
     # read html from each URL
-    
-    # get security certificates so we can access https links (we'll delete it once we have the webpages)
-    if(!file.exists("cacert.perm")) download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.perm")
-    html.webpages <- lapply(input[!is.file], getURL, followlocation = TRUE, cainfo = "cacert.perm")
-    file.remove("cacert.perm")
+    html.webpages <- lapply(input[!is.file], getURL, followlocation = TRUE)
     
     # return all html data as list
     return(c(html.files, html.webpages))
