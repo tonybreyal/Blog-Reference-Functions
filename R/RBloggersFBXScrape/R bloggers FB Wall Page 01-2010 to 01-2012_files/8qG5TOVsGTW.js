@@ -1,0 +1,6 @@
+/*1321314459,169776318*/
+
+if (window.CavalryLogger) { CavalryLogger.start_js(["gOFUl"]); }
+
+function UIQSurvey(a,c,b){this.divId=a;this.surveyId=c;this.showThanks=b;this.ele=$(this.divId);}copy_properties(UIQSurvey.prototype,{submitSurvey:function(){var c=DOM.scry(this.ele,'input.answer');var d=DOM.scry(this.ele,'textarea.answer');var f={};for(var b=0;b<d.length;b++){e=d[b].value;if(e!==null)f[d[b].id]=e;}for(var b=0;b<c.length;b++){var e=null;switch(c[b].type){case 'radio':case 'checkbox':e=c[b].checked;break;case 'text':case 'hidden':e=c[b].value;break;}if(e!==null)f[c[b].id]=e;}var a=function(){if(this.showThanks)DOM.setContent(this.ele,"Thanks for your feedback.");}.bind(this);new AsyncRequest().setURI('/ads/ajax/qsurvey_log.php').setData({qid:this.surveyId,values:f,extra:DOM.find(this.ele,'.extra').value}).setHandler(a).send();return false;}});function show_target_box_after(a){var c=ge('target_box');if(!c)return;var b=(ge(a)?$(a).parentNode:null);if(!b)return;DOM.remove(c);DOM.insertAfter(b,c);CSS.show(c);}function hide_target_box(){var a=ge('target_box');if(!a)return;CSS.hide(a);}
+add_properties('TypeaheadBehaviors',{preventSubmitOnEnter:function(b){var a=b.getCore().getElement();Event.listen(a,'keypress',function(c){if(Event.getKeyCode(c)==KEYS.RETURN)c.kill();});}});

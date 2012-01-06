@@ -38,9 +38,5 @@ decode_short_url("http://tinyurl.com/adcd",
                  "http://www.google.com",
                  "http://1.cloudst.at/myeg") 
 
-# $`http://tinyurl.com/adcd`
-# [1] "http://www.r-project.org/"
-# 
-# $`http://www.google.com`
-# [1] "http://www.google.co.uk/"
+
 
