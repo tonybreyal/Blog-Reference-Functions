@@ -49,8 +49,9 @@ rbloggersFBXScraper <- function() {
     message <- xpathLVApply(doc, xpath.base, "//span[@class='messageBody']", xmlValue)
     embeded.link <- xpathLVApply(doc, xpath.base, "//div[@class='uiAttachmentTitle']//a/@href", I)
     embeded.link.text <- xpathLVApply(doc, xpath.base, "//div[@class='mts uiAttachmentDesc translationEligibleUserAttachmentMessage']", xmlValue)
-    sample.comments <- xpathLVApply(doc, xpath.base, "//span[@class='commentBody']/text()", xmlValue,  FUN2=function(x) lapply(x, function(xx) paste(unique(xx), collapse = " [NEXT>>] ")))
-                                 
+    sample.comments <- xpathLVApply(doc, xpath.base, "//ul[@class='commentList']", xmlValue)
+
+                
     # pull vectors into a single data.frame
     df <- data.frame(timestamp, num.likes, num.comments, num.shares, posted.by, message, embeded.link, embeded.link.text, sample.comments, stringsAsFactors=FALSE)
         
@@ -67,10 +68,12 @@ rbloggersFBXScraper <- function() {
     df$num.comments <- gsub(",", "", df$num.comments, fixed = TRUE)
     df$num.shares <- gsub(",", "", df$num.shares, fixed = TRUE)
     
-    # remove redundant text
-    df$num.likes <- as.integer( gsub(".*(\\d+).*", "\\1", df$num.likes) )
-    df$num.comments <- as.integer(gsub(".*(\\d+).*", "\\1", df$num.comments) )
-    df$num.shares <- as.integer(gsub(".*(\\d+).*", "\\1", df$num.shares) )  
+    # remove NA
+    df$num.comments[is.na(df$num.comments) & df$sample.comments!=""] <- "At least 1 comment"
+    df$num.comments[is.na(df$num.comments)] <- "0"
+    df$num.likes[is.na(df$num.likes)] <- "0"
+    df$num.shares[is.na(df$num.shares)] <- "0"    
+
     
     # add column to recognise an r-bloogers.com weblink
     df$rbloggers.link <- NA
@@ -81,7 +84,7 @@ rbloggersFBXScraper <- function() {
     return(df)
   }
   
-  get_meta_data <- function(df) {
+  get_metadata <- function(df) {
     scrape_rbloggers <- function(u) {
       if(is.na(u)) return(data.frame(title=NA, first.published=NA, author=NA, blog.name=NA, blog.link=NA, tags=NA, stringsAsFactors=FALSE))
       print(u)
@@ -146,4 +149,4 @@ rbloggersFBXScraper <- function() {
 # # author            "Tony Breyal"                                                                                                                                                                                                                                                                                                              
 # # blog.name         " Consistently Infrequent Â» R"                                                                                                                                                                                                                                                                                            
 # # blog.link         "http://tonybreyal.wordpress.com/2011/11/08/web-scraping-google-scholar-partial-success/"                                                                                                                                                                                                                                  
-# # tags              "google scholar, R, rstats, web scraping, XML, XPath"  
+# # tags              "google scholar, R, rstats, web scraping, XML, XPath"
